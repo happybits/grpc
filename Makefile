@@ -791,7 +791,7 @@ PC_LIBS_GRPCXX =
 CPPFLAGS := -Ithird_party/googletest/googletest/include -Ithird_party/googletest/googlemock/include $(CPPFLAGS)
 
 PROTOC_PLUGINS_ALL = $(BINDIR)/$(CONFIG)/grpc_cpp_plugin $(BINDIR)/$(CONFIG)/grpc_csharp_plugin $(BINDIR)/$(CONFIG)/grpc_node_plugin $(BINDIR)/$(CONFIG)/grpc_objective_c_plugin $(BINDIR)/$(CONFIG)/grpc_php_plugin $(BINDIR)/$(CONFIG)/grpc_python_plugin $(BINDIR)/$(CONFIG)/grpc_ruby_plugin
-PROTOC_PLUGINS_DIR = $(BINDIR)/$(CONFIG)
+PROTOC_PLUGINS_DIR ?= $(BINDIR)/$(CONFIG)
 
 ifeq ($(HAS_SYSTEM_PROTOBUF),true)
 ifeq ($(HAS_PKG_CONFIG),true)
@@ -807,7 +807,9 @@ endif
 else
 PC_LIBS_GRPCXX = -lprotobuf
 endif
+ifeq ($(PROTOC_PLUGINS_DIR),$(BINDIR)/$(CONFIG))
 PROTOC_PLUGINS = $(PROTOC_PLUGINS_ALL)
+endif
 else
 ifeq ($(HAS_EMBEDDED_PROTOBUF),true)
 PROTOBUF_DEP = $(LIBDIR)/$(CONFIG)/protobuf/libprotobuf.a
