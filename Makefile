@@ -642,7 +642,7 @@ else
 HAS_EMBEDDED_PROTOBUF = true
 endif
 
-PROTOC_PLUGINS_DIR = $(BINDIR)/$(CONFIG)
+PROTOC_PLUGINS_DIR ?= $(BINDIR)/$(CONFIG)
 
 PROTOC_PLUGINS_ALL = $(BINDIR)/$(CONFIG)/grpc_cpp_plugin $(BINDIR)/$(CONFIG)/grpc_csharp_plugin $(BINDIR)/$(CONFIG)/grpc_node_plugin $(BINDIR)/$(CONFIG)/grpc_objective_c_plugin $(BINDIR)/$(CONFIG)/grpc_php_plugin $(BINDIR)/$(CONFIG)/grpc_python_plugin $(BINDIR)/$(CONFIG)/grpc_ruby_plugin
 ifeq ($(HAS_EMBEDDED_PROTOBUF),true)
@@ -650,7 +650,9 @@ PROTOBUF_DEP = $(LIBDIR)/$(CONFIG)/protobuf/libprotobuf.a
 CPPFLAGS := -Ithird_party/protobuf/src $(CPPFLAGS)
 LDFLAGS := -L$(LIBDIR)/$(CONFIG)/protobuf $(LDFLAGS)
 PROTOC = $(BINDIR)/$(CONFIG)/protobuf/protoc
+ifeq ($(PROTOC_PLUGINS_DIR),$(BINDIR)/$(CONFIG))
 PROTOC_PLUGINS = $(PROTOC_PLUGINS_ALL)
+endif
 else
 NO_PROTOBUF = true
 endif
