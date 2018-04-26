@@ -378,7 +378,11 @@ endif
 endif
 
 ifeq ($(SYSTEM),Linux)
+ifeq ($(ANDROID_NDK),true)
+LIBS = dl m
+else
 LIBS = dl rt m pthread
+endif
 LDFLAGS += -pthread
 endif
 
