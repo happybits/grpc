@@ -352,7 +352,7 @@ CPPFLAGS += -fPIC
 LDFLAGS += -fPIC
 endif
 
-INCLUDES = . include $(GENDIR)
+INCLUDES = . ./include $(GENDIR)
 LDFLAGS += -Llibs/$(CONFIG)
 
 ifeq ($(SYSTEM),Darwin)
