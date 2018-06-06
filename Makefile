@@ -356,6 +356,7 @@ INCLUDES = . ./include $(GENDIR)
 LDFLAGS += -Llibs/$(CONFIG)
 
 ifeq ($(SYSTEM),Darwin)
+ifneq ($(USE_SYSTEM_INCLUDES),false)
 ifneq ($(wildcard /usr/local/ssl/include),)
 INCLUDES += /usr/local/ssl/include
 endif
@@ -374,6 +375,7 @@ LDFLAGS += -L/opt/local/lib
 endif
 ifneq ($(wildcard /usr/local/lib),)
 LDFLAGS += -L/usr/local/lib
+endif
 endif
 endif
 
@@ -7239,11 +7241,11 @@ $(LIBDIR)/$(CONFIG)/liblb_load_data_store.a: protobuf_dep_error
 
 else
 
-$(LIBDIR)/$(CONFIG)/liblb_load_data_store.a: $(ZLIB_DEP) $(OPENSSL_DEP) $(CARES_DEP) $(ADDRESS_SORTING_DEP) $(PROTOBUF_DEP) $(LIBLB_LOAD_DATA_STORE_OBJS) 
+$(LIBDIR)/$(CONFIG)/liblb_load_data_store.a: $(ZLIB_DEP) $(OPENSSL_DEP) $(CARES_DEP) $(ADDRESS_SORTING_DEP) $(PROTOBUF_DEP) $(LIBLB_LOAD_DATA_STORE_OBJS)
 	$(E) "[AR]      Creating $@"
 	$(Q) mkdir -p `dirname $@`
 	$(Q) rm -f $(LIBDIR)/$(CONFIG)/liblb_load_data_store.a
-	$(Q) $(AR) $(AROPTS) $(LIBDIR)/$(CONFIG)/liblb_load_data_store.a $(LIBLB_LOAD_DATA_STORE_OBJS) 
+	$(Q) $(AR) $(AROPTS) $(LIBDIR)/$(CONFIG)/liblb_load_data_store.a $(LIBLB_LOAD_DATA_STORE_OBJS)
 ifeq ($(SYSTEM),Darwin)
 	$(Q) ranlib -no_warning_for_no_symbols $(LIBDIR)/$(CONFIG)/liblb_load_data_store.a
 endif
