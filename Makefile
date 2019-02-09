@@ -387,6 +387,10 @@ LIBS = m pthread ws2_32
 LDFLAGS += -pthread
 endif
 
+ifneq ($(EXCLUDE_LIBS),)
+LIBS := $(filter-out $(EXCLUDE_LIBS),$(LIBS))
+endif
+
 #
 # The steps for cross-compiling are as follows:
 # First, clone and make install of grpc using the native compilers for the host.
