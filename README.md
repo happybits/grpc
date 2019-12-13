@@ -3,6 +3,8 @@ gRPC - An RPC library and framework
 
 gRPC is a modern, open source, high-performance remote procedure call (RPC) framework that can run anywhere. gRPC enables client and server applications to communicate transparently, and simplifies the building of connected systems.
 
+(Joya note: We have build scripts over at (happybits/hbmx-prebuilt)[https://github.com/happybits/hbmx-prebuilt] for this and other dependencies. Check them out for convenience and instructions that may be more up-to-date.)
+
 <table>
   <tr>
     <td><b>Homepage:</b></td>
